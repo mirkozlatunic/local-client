@@ -9,6 +9,7 @@ const App = () => {
   const ref = useRef<any>();
   const [input, setInput] = useState("");
   const [code, setCode] = useState("");
+
   const startService = async () => {
     ref.current = await esbuild.startService({
       worker: true,
@@ -19,10 +20,17 @@ const App = () => {
     startService();
   }, []);
 
-  const onClick = () => {
+  const onClick = async () => {
     if (!ref.current) {
       return;
     }
+
+    const result = await ref.current.transform(input, {
+      loader: "jsx",
+      target: "es2015",
+    });
+
+    setCode(result.code);
   };
 
   return (
