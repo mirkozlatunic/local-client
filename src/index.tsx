@@ -27,13 +27,13 @@ const App = () => {
     }
 
     const result = await ref.current.build({
-      etrnyPoints: ["index.js"],
+      entryPoints: ["index.js"],
       bundle: true,
-      write: true,
+      write: false,
       plugins: [unpkgPathPlugin()],
     });
 
-    setCode(result.code);
+    setCode(result.outputFiles[0].text);
   };
 
   return (
