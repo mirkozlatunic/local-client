@@ -1,3 +1,4 @@
+import "bulmaswatch/superhero/bulmaswatch.min.css";
 import * as esbuild from "esbuild-wasm";
 import { useState, useEffect, useRef } from "react";
 import ReactDOM from "react-dom/client";
@@ -6,13 +7,13 @@ import { fetchPlugin } from "./plugins/fetch-plugin";
 import CodeEditor from "./components/code-editor";
 
 const el = document.getElementById("root");
+
 const root = ReactDOM.createRoot(el!);
 
 const App = () => {
   const ref = useRef<any>();
   const iframe = useRef<any>();
   const [input, setInput] = useState("");
-  const [code, setCode] = useState("");
 
   const startService = async () => {
     ref.current = await esbuild.startService({
@@ -47,12 +48,12 @@ const App = () => {
   };
 
   const html = `
-  <html>
-    <head>
+    <html>
+      <head></head>
       <body>
         <div id="root"></div>
         <script>
-          window.addEventListener("message", (event) => {
+          window.addEventListener('message', (event) => {
             try {
               eval(event.data);
             } catch (err) {
@@ -60,17 +61,16 @@ const App = () => {
               root.innerHTML = '<div style="color: red;"><h4>Runtime Error</h4>' + err + '</div>';
               console.error(err);
             }
-          }, false)
+          }, false);
         </script>
       </body>
-    </head>
-  </html>
+    </html>
   `;
 
   return (
     <div>
       <CodeEditor
-        initialValue="const a = 1"
+        initialValue="const a = 1;"
         onChange={(value) => setInput(value)}
       />
       <textarea
@@ -80,8 +80,12 @@ const App = () => {
       <div>
         <button onClick={onClick}>Submit</button>
       </div>
-      <pre>{code}</pre>
-      <iframe ref={iframe} sandbox="allow-scripts" srcDoc={html} />
+      <iframe
+        title="code preview"
+        ref={iframe}
+        sandbox="allow-scripts"
+        srcDoc={html}
+      />
     </div>
   );
 };
