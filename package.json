@@ -1,5 +1,5 @@
 {
-  "name": "bookjs-app",
+  "name": "jbook",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -19,7 +19,7 @@
     "esbuild-wasm": "0.8.27",
     "jscodeshift": "0.11.0",
     "localforage": "^1.10.0",
-    "monaco-jsx-highlighter": "^2.77.77",
+    "monaco-jsx-highlighter": "0.0.15",
     "prettier": "^2.8.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
