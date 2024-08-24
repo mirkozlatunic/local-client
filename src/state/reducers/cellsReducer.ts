@@ -21,10 +21,13 @@ const initialState: CellsState = {
 
 const reducer = produce((state: CellsState = initialState, action: Action) => {
   switch (action.type) {
+    case ActionTypes.SAVE_CELLS_ERROR:
+      state.error = action.payload;
+      return state;
+
     case ActionTypes.FETCH_CELLS:
       state.loading = true;
       state.error = null;
-
       return state;
 
     case ActionTypes.FETCH_CELLS_COMPLETE:
